@@ -1,4 +1,4 @@
-#/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
 # The MIT License (MIT)
@@ -25,15 +25,22 @@
 
 import argparse
 
-import lua4dec
+from lua4dec.parser import Lua4File
+from lua4dec.formatter import Lua4DebugFormatter
 
-
-def main():
+def lua4_decompile():
     parser = argparse.ArgumentParser(prog='lua4dec',
         description='Decompile Lua 4 bytecode files')
-    parser.add_argument('filename')
+    parser.add_argument('source')
+    parser.add_argument('dest')
 
     args = parser.parse_args()
 
+    with open(args.source, 'rb') as lua_file:
+        lua_obj = Lua4File.parse_stream(lua_file)
+        formatter = Lua4DebugFormatter()
+        with open(args.dest, 'w') as out_f:
+            formatter.dump(lua_obj, out_f)
+
 if __name__ == '__main__':
-    main()
+    lua4_decompile()

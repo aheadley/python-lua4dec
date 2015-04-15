@@ -59,7 +59,7 @@ SETUP_ARGS = {
     'packages':         find_packages(),
     'entry_points':     {
         'console_scripts': [
-            'lua4dec            = lua4dec.scripts.decompile:main',
+            'lua4dec            = lua4dec.scripts.decompile:lua4_decompile',
         ],
     },
     'test_suite':       'tests',

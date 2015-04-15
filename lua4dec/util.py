@@ -27,3 +27,5 @@ import enum
 @enum.unique
 class C_Enum(enum.IntEnum):
     pass
+
+CAST_TO_UINT32 = lambda value: value & 0xFFFFFFFF
